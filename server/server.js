@@ -15,7 +15,7 @@ import postRoutes from './routes/posts.js';
 import { verifyToken } from './middlewares/auth.js';
 import { register } from './controllers/auth.js';
 import { createPost } from './controllers/posts.js';
-import { search, recommendations, trending } from './controllers/search.js'
+import { search, recommendations, trending, random } from './controllers/search.js'
 
 /* CONFIGURATIONS  */
 dotenv.config();
@@ -71,6 +71,8 @@ app.post('/getPassword', async (req, res) => {
 app.post('/search',search)
 app.get('/recommendations',recommendations)
 app.get('/trending',trending)
+app.get('/random',random)
+
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 3001;

@@ -67,10 +67,14 @@ const UserSchema = new mongoose.Schema(
         ref: "Post",
       },
     ],
-    searches:[
+    search:[
       {
-        type: 'String',
-        
+        tag: {
+          type: String
+        },
+        count: {
+          type: Number
+        }
       }
     ]
   },

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
@@ -8,7 +9,15 @@ import { GoogleLogin, googleLogout } from "@react-oauth/google";
 import { client } from "../client";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector(state => state.auth.user);
+
+  useEffect(() => {
+    if(user._id) {
+      navigate('/home');
+    }
+  }, [user]);
 
   const responseGoogle = (response) => {
     localStorage.setItem("user", JSON.stringify(response.profileObj));

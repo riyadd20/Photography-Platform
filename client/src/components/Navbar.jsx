@@ -1,8 +1,10 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdAdd, IoMdSearch } from "react-icons/io";
+import { useSelector } from "react-redux";
 
-const Navbar = ({ searchTerm, setSearchTerm, user }) => {
+const Navbar = ({ searchTerm, setSearchTerm }) => {
+  const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
 
   if (user) {
@@ -22,7 +24,7 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
         <div className="flex gap-3 ">
           <Link to={`user-profile/${user?._id}`} className="hidden md:block">
             <img
-              src={user.image}
+              src={`http://localhost:3001/assets/${user.picturePath}`}
               alt="user-pic"
               className="w-14 h-12 rounded-lg "
             />

@@ -1,19 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import { HiMenu } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { Link, Route, Routes } from "react-router-dom";
 import { Sidebar, UserProfile } from "../components";
 import { userQuery } from "../utils/data";
 import { client } from "../client";
-import Pin from "./Pin";
+import Pins from "./Pins";
 // import logo from "../assets/logo.png";
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
-  const [user, setUser] = useState(useSelector(state => state.auth.user));
+  const [user, setUser] = useState(useSelector((state) => state.auth.user));
   const scrollRef = useRef(null);
-  console.log(user)
 
   // const userInfo =
   //   localStorage.getItem("user") !== "undefined"
@@ -72,7 +71,7 @@ const Home = () => {
       <div className="pb-2 flex-1 h-screen overflow-y-scroll" ref={scrollRef}>
         <Routes>
           <Route path="/user-profile/:userId" element={<UserProfile />} />
-          <Route path="/*" element={<Pin user={user && user} />} />
+          <Route path="/*" element={<Pins user={user && user} />} />
         </Routes>
       </div>
     </div>

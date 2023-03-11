@@ -17,8 +17,8 @@ const Pin = ({ pin }) => {
   const navigate = useNavigate();
 
   const { postedBy, picturePath, _id, destination } = pin;
-  console.log(picturePath)
   const image = `http://localhost:3001/assets/${picturePath}`
+  console.log(image);
 
   // const user =
   //   localStorage.getItem("user") !== "undefined"

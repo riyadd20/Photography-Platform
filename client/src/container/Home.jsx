@@ -5,7 +5,7 @@ import { Link, Route, Routes } from "react-router-dom";
 
 import { Sidebar, UserProfile } from "../components";
 import { userQuery } from "../utils/data";
-// import { client } from "../client";
+import { client } from "../client";
 import Pin from "./Pin";
 // import logo from "../assets/logo.png";
 
@@ -14,10 +14,10 @@ const Home = () => {
   const [user, setUser] = useState();
   const scrollRef = useRef(null);
 
-  const userInfo =
-    localStorage.getItem("user") !== "undefined"
-      ? JSON.parse(localStorage.getItem("user"))
-      : localStorage.clear();
+  // const userInfo =
+  //   localStorage.getItem("user") !== "undefined"
+  //     ? JSON.parse(localStorage.getItem("user"))
+  //     : localStorage.clear();
 
   // useEffect(() => {
   //   const query = userQuery(userInfo?.googleId);

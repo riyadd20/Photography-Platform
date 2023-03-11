@@ -36,7 +36,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    // const formProps = Object.fromEntries(formData);
     const formProps = Object.fromEntries(formData);
     formData.append("picturePath", formProps.picture.name)
     

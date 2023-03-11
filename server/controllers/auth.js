@@ -9,7 +9,6 @@ const register = async (req, res) => {
             firstName,
             lastName,
             email,
-            username,
             password,
             picturePath,
             city,
@@ -23,7 +22,6 @@ const register = async (req, res) => {
             firstName,
             lastName,
             email,
-            username,
             password: hashedPassword,
             picturePath,
             location: { city, country },
@@ -39,9 +37,9 @@ const register = async (req, res) => {
 /* LOGGING IN */
 const login = async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
 
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ email });
         if(!user) return res.status(400).json({ message: 'User does not exist.' });
 
         const isMatch = await bcrypt.compare(password, user.password);

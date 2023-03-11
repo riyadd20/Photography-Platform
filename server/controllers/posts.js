@@ -4,7 +4,7 @@ import User from "../models/User.js";
 /* CREATE */
 export const createPost = async (req, res) => {
     try {
-        const { userId, title, description, hashtags, specs, picturePath, city, country, price } = req.body;
+        const { userId, title, description, hashtags, specs, picturePath, city, country, price, category } = req.body;
         console.log(req.body)
         
         const user = await User.findById(userId);
@@ -21,10 +21,14 @@ export const createPost = async (req, res) => {
             share: `http://loclahost:3001/assets/${picturePath}`,
             likes: {},
             saved: {},
+            category: category
         });
 
-        await newPost.save();
-
+        let newRoomId
+        const data = await newPost.save();
+        newRoomId = data._id
+        user.created.push(newRoomId)
+        user.save();
         return res.status(201).json({ success: 'Post added successfully!' });
 
         // // Get All Posts

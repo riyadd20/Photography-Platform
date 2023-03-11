@@ -51,8 +51,8 @@ app.use('/posts', postRoutes);
 /* ROUTES WITH FILES */
 app.post('/auth/register', upload.single('picture'), register);
 // app.post('/auth/register', register);
-app.post('/create', verifyToken, upload.single('picture'), createPost);
-// app.post('/post/create', createPost);
+// app.post('/create', verifyToken, upload.single('picture'), createPost);
+app.post('/post/create', createPost);
 
 app.post('/getPassword', async (req, res) => {
   try {

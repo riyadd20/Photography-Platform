@@ -84,9 +84,10 @@ export const updateProfileViews = async (req, res) => {
     try {
         const { id } = req.params;
         const { userId } = req.body;
-
+        
         if(id !== userId) {
             const user = await User.findById(id);
+            console.log(user)
             const isViewed = user.viewedProfile.get(userId);
 
             if(!isViewed) {

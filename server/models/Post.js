@@ -37,6 +37,7 @@ const postSchema = mongoose.Schema(
         type: String,
       },
     },
+    price: Number,
     share: String,
     likes: {
       type: Map,

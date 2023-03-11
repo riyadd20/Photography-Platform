@@ -4,7 +4,7 @@ import User from "../models/User.js";
 /* CREATE */
 export const createPost = async (req, res) => {
     try {
-        const { userId, title, description, hashtags, specs, picturePath, city, country } = req.body;
+        const { userId, title, description, hashtags, specs, picturePath, city, country, price } = req.body;
         console.log(req.body)
         
         const user = await User.findById(userId);
@@ -17,6 +17,7 @@ export const createPost = async (req, res) => {
             specs,
             picturePath,
             location: { city, country },
+            price,
             share: `http://loclahost:3001/assets/${picturePath}`,
             likes: {},
             saved: {},

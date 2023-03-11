@@ -7,7 +7,7 @@ import { Sidebar, UserProfile } from "../components";
 import { userQuery } from "../utils/data";
 import { client } from "../client";
 import Pins from "./Pins";
-// import logo from "../assets/logo.png";
+import logo from "../assets/logo.png";
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -44,8 +44,7 @@ const Home = () => {
             onClick={() => setToggleSidebar(true)}
           />
           <Link to="/">
-            {/* <img src={logo} alt="logo" className="w-28" /> */}
-            LensLyfe
+            <img src={logo} alt="logo" className="w-28" />
           </Link>
           <Link to={`user-profile/${user?._id}`}>
             <img

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 // import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
 // import { GoogleLogin, googleLogout } from "@react-oauth/google";
-// import logo from "../assets/logowhite.png";
+import logo from "../assets/logo.png";
 import axios from "axios";
 import { setLogin } from "../store/auth/auth";
 
@@ -16,8 +16,8 @@ const Login = () => {
   const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    if(user?._id) {
-      navigate('/home');
+    if (user?._id) {
+      navigate("/home");
     }
   }, [user]);
 
@@ -67,10 +67,9 @@ const Login = () => {
             className="w-full h-full object-cover"
           />
           <div className="absolute flex flex-col justify-center items-center top-0 right-0 left-0 bottom-0    bg-blackOverlay">
-            <div className="p-5 text-white">
-              {/* <img src={logo} width="130px" /> */}
-              LensLyfe
-            </div>
+            {/* <div className="p-5 text-white">
+              <img src={logo} width="130px" />
+            </div> */}
 
             <div className="shadow-2xl">
               {/* <GoogleLogin
@@ -89,12 +88,14 @@ const Login = () => {
                 onFailure={responseGoogle}
                 cookiePolicy="single_host_origin"
               /> */}
-
               <form onSubmit={handleSubmit}>
+                <div className="text-indigo-200 font-bold mb-8 text-4xl text-center">
+                  Log In
+                </div>
                 <div className="mb-6">
                   <label
                     htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-300 dark:text-white"
                   >
                     Your email
                   </label>
@@ -102,7 +103,7 @@ const Login = () => {
                     type="email"
                     id="email"
                     name="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border px-8 border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@flowbite.com"
                     required
                   />
@@ -110,7 +111,7 @@ const Login = () => {
                 <div className="mb-6">
                   <label
                     htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-300 dark:text-white"
                   >
                     Your password
                   </label>
@@ -118,13 +119,13 @@ const Login = () => {
                     type="password"
                     id="password"
                     name="password"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   />
                 </div>
                 <button
                   type="submit"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className="text-white bg-indigo-900 hover:bg-indigo-300 hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Submit
                 </button>

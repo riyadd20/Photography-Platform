@@ -73,6 +73,12 @@ const UserSchema = new mongoose.Schema(
         ref: "Post",
       },
     ],
+    searches:[
+      {
+        type: 'String',
+        
+      }
+    ]
   },
   { timestamps: true }
 );

@@ -14,6 +14,8 @@ import authRoutes from './routes/auth.js';
 // import postRoutes from './routes/posts.js';
 import { verifyToken } from './middlewares/auth.js';
 import { register } from './controllers/auth.js';
+import { search } from './controllers/Search.js'
+
 
 /* CONFIGURATIONS  */
 dotenv.config();
@@ -63,6 +65,9 @@ app.post('/getPassword', async (req, res) => {
   }
 })
 
+// search apis
+app.post('/search',search)
+
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 3001;
 
@@ -80,3 +85,6 @@ try {
 } catch (error) {
   console.log('Database not connected...')
 }
+
+
+

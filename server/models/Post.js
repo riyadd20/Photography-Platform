@@ -7,6 +7,10 @@ const postSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
+    userPicturePath: {
+      type: String,
+      default: 'default.jpg',
+    },
     title: {
       type: String,
       required: true,
@@ -17,8 +21,14 @@ const postSchema = mongoose.Schema(
       required: true,
     },
     hashtags: Array,
-    specs: String,
-    picturePath: String,
+    specs: {
+      type: String,
+      required: true,
+    },
+    picturePath: {
+      type: String,
+      required: true
+    },
     location: {
       city: {
         type: String,
@@ -27,6 +37,7 @@ const postSchema = mongoose.Schema(
         type: String,
       },
     },
+    price: Number,
     share: String,
     likes: {
       type: Map,

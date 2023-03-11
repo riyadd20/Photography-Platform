@@ -79,3 +79,25 @@ export const addRemoveFollowing = async (req, res) => {
         return res.status(404).json({ message: error.message });
     }
 }
+
+export const updateProfileViews = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { userId } = req.body;
+
+        if(id !== userId) {
+            const user = await User.findById(id);
+            const isViewed = user.viewedProfile.get(userId);
+
+            if(!isViewed) {
+                user.viewedProfile.set(userId, true);
+            }
+
+            await user.save();
+        }
+
+        return res.status(200).json({ success: 'Profile succesfully viewed!' });
+    } catch (error) {
+        return res.status(404).json({ message: error.message });
+    }
+}

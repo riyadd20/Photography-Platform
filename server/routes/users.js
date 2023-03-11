@@ -4,6 +4,7 @@ import {
     getUserFollowers,
     getUserFollowing,
     addRemoveFollowing,
+    updateProfileViews
 } from '../controllers/users.js';
 import { verifyToken } from '../middlewares/auth.js';
 
@@ -22,5 +23,8 @@ router.get('/:id/followings', verifyToken, getUserFollowing);
 /* UPDATE */
 router.patch('/:id/:followingId', verifyToken, addRemoveFollowing);
 // router.patch('/:id/:followingId', addRemoveFollowing);
+
+// router.patch('/:id', verifyToken, updateProfileViews);
+router.patch('/:id', updateProfileViews);
 
 export default router;

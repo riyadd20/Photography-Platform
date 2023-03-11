@@ -51,6 +51,9 @@ const postSchema = mongoose.Schema(
       type: Number,
       default: 1,
     },
+    category:{
+      type:String
+    }
   },
   { timestamps: true }
 );

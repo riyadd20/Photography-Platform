@@ -76,10 +76,7 @@ const UserSchema = new mongoose.Schema(
           type: Number
         }
       }
-    ],
-    category:{
-      type:String
-    }
+    ]
   },
   { timestamps: true }
 );

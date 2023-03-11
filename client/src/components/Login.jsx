@@ -16,8 +16,8 @@ const Login = () => {
   const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    if (user._id) {
-      navigate("/home");
+    if(user?._id) {
+      navigate('/home');
     }
   }, [user]);
 

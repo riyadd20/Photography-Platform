@@ -47,8 +47,8 @@ app.use('/users', userRoutes);
 // app.use('/posts', postRoutes);
 
 /* ROUTES WITH FILES */
-// app.post('/auth/register', upload.single('picture'), register);
-app.post('/auth/register', register);
+app.post('/auth/register', upload.single('picture'), register);
+// app.post('/auth/register', register);
 
 app.post('/getPassword', async (req, res) => {
   try {

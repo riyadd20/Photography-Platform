@@ -13,7 +13,6 @@ const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const [user, setUser] = useState(useSelector((state) => state.auth.user));
   const scrollRef = useRef(null);
-  console.log(user);
 
   // const userInfo =
   //   localStorage.getItem("user") !== "undefined"

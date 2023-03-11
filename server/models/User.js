@@ -37,7 +37,7 @@ const UserSchema = new mongoose.Schema(
     },
     picturePath: {
       type: String,
-      default: "assets/default.jpg",
+      default: "default.jpg",
     },
     followers: [
       {
@@ -76,7 +76,10 @@ const UserSchema = new mongoose.Schema(
           type: Number
         }
       }
-    ]
+    ],
+    category:{
+      type:String
+    }
   },
   { timestamps: true }
 );

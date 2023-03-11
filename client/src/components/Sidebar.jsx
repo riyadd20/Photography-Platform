@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import { RiHomeFill } from "react-icons/ri";
 import { IoIosArrowForward } from "react-icons/io";
@@ -10,10 +11,13 @@ const isNotActiveStyle =
 const isActiveStyle =
   "flex items-center px-5 gap-3 font-extrabold border-r-2 border-black  transition-all duration-200 ease-in-out capitalize";
 
-const Sidebar = ({ closeToggle, user }) => {
+const Sidebar = ({ closeToggle }) => {
+  const user = useSelector((state) => state.auth.user);
   const handleCloseSidebar = () => {
     if (closeToggle) closeToggle(false);
   };
+
+  const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
     <div className="flex flex-col justify-between bg-white h-full overflow-y-scroll min-w-210 hide-scrollbar">
@@ -62,11 +66,11 @@ const Sidebar = ({ closeToggle, user }) => {
           onClick={handleCloseSidebar}
         >
           <img
-            src={user.image}
+            src={`http://localhost:3001/assets/${user.picturePath}`}
             className="w-10 h-10 rounded-full"
             alt="user-profile"
           />
-          <p>{user.userName}</p>
+          <p>{fullName}</p>
           <IoIosArrowForward />
         </Link>
       )}

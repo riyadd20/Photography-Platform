@@ -38,7 +38,7 @@ export const createPost = async (req, res) => {
 /* READ */
 export const getFeedPosts = async (req, res) => {
     try {
-        const post = await Post.find();
+        const post = await Post.find().populate('userId');
 
         return res.status(200).json(post);
     } catch (error) {
@@ -134,7 +134,7 @@ export const savePost = async (req, res) => {
             // By default it is false, which returns the non-updated document
         );
 
-        return res.status(200).json({ success: 'Post successfully saved!' });
+        return res.status(200).json({ saved: !isSaved });
     } catch (error) {
         return res.status(404).json({ message: error.message });
     }

@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
-// import { GoogleLogin, googleLogout } from "@react-oauth/google";
 import axios from "axios";
 import logo from "../assets/logo.png";
 
@@ -65,28 +63,7 @@ const SignUp = () => {
             className="w-full h-full object-cover"
           />
           <div className="absolute flex flex-col justify-center items-center top-0 right-0 left-0 bottom-0 bg-blackOverlay">
-            {/* <div className="p-5 text-white mb-5">
-              <img src={logo} width="150px" />
-            </div> */}
-
             <div className="shadow-2xl">
-              {/* <GoogleLogin
-                clientId={`${process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}`}
-                render={(renderProps) => (
-                  <button
-                    type="button"
-                    className="bg-mainColor flex justify-center items-center p-3 rounded-lg cursor-pointer outline-none"
-                    onClick={renderProps.onClick}
-                    disabled={renderProps.disabled}
-                  >
-                    <FcGoogle className="mr-4" /> Sign in with google
-                  </button>
-                )}
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy="single_host_origin"
-              /> */}
-
               <form onSubmit={handleSubmit}>
                 <div className="text-indigo-200 font-bold mb-8 text-4xl text-center">
                   Sign up

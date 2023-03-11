@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { MdDownloadForOffline } from "react-icons/md";
@@ -6,19 +7,23 @@ import { AiTwotoneDelete } from "react-icons/ai";
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 
 import { client, urlFor } from "../client";
+import axios from "axios";
 
 const Pin = ({ pin }) => {
+  const { user, token } = useSelector((state) => state.auth);
   const [postHovered, setPostHovered] = useState(false);
   const [savingPost, setSavingPost] = useState(false);
 
   const navigate = useNavigate();
 
-  const { postedBy, image, _id, destination } = pin;
+  const { postedBy, picturePath, _id, destination } = pin;
+  console.log(picturePath)
+  const image = `http://localhost:3001/assets/${picturePath}`
 
-  const user =
-    localStorage.getItem("user") !== "undefined"
-      ? JSON.parse(localStorage.getItem("user"))
-      : localStorage.clear();
+  // const user =
+  //   localStorage.getItem("user") !== "undefined"
+  //     ? JSON.parse(localStorage.getItem("user"))
+  //     : localStorage.clear();
 
   const deletePin = (id) => {
     client.delete(id).then(() => {
@@ -26,35 +31,42 @@ const Pin = ({ pin }) => {
     });
   };
 
-  let alreadySaved = pin?.save?.filter(
-    (item) => item?.postedBy?._id === user?.googleId
-  );
+  let alreadySaved = pin.saved[user._id];
 
-  alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
+  // alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
 
-  const savePin = (id) => {
-    if (alreadySaved?.length === 0) {
-      setSavingPost(true);
-
-      client
-        .patch(id)
-        .setIfMissing({ save: [] })
-        .insert("after", "save[-1]", [
-          {
-            _key: uuidv4(),
-            userId: user?.googleId,
-            postedBy: {
-              _type: "postedBy",
-              _ref: user?.googleId,
-            },
-          },
-        ])
-        .commit()
-        .then(() => {
-          window.location.reload();
-          setSavingPost(false);
-        });
+  const savePin = async (id) => {
+    try {
+      const { data } = await axios.patch(`http://localhost:3001/${id}/save`, {
+        headers: { Authorization: `Bearer ${token}` },
+        body: { userId: user._id },
+      })
+      console.log(data);
+    } catch (error) {
+      console.log(error.message);
     }
+    // if (alreadySaved?.length === 0) {
+    //   setSavingPost(true);
+
+    //   client
+    //     .patch(id)
+    //     .setIfMissing({ save: [] })
+    //     .insert("after", "save[-1]", [
+    //       {
+    //         _key: uuidv4(),
+    //         userId: user?.googleId,
+    //         postedBy: {
+    //           _type: "postedBy",
+    //           _ref: user?.googleId,
+    //         },
+    //       },
+    //     ])
+    //     .commit()
+    //     .then(() => {
+    //       window.location.reload();
+    //       setSavingPost(false);
+    //     });
+    // }
   };
 
   return (
@@ -65,13 +77,12 @@ const Pin = ({ pin }) => {
         onClick={() => navigate(`/pin-detail/${_id}`)}
         className=" relative cursor-zoom-in w-auto hover:shadow-lg rounded-lg overflow-hidden transition-all duration-500 ease-in-out"
       >
-        {image && (
-          <img
-            className="rounded-lg w-full "
-            src={urlFor(image).width(250).url()}
-            alt="user-post"
-          />
-        )}
+        <img
+          className="rounded-lg w-full "
+          // src={urlFor(image).width(250).url()}
+          src={image}
+          alt="user-post"
+        />
         {postHovered && (
           <div
             className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50"
@@ -80,7 +91,8 @@ const Pin = ({ pin }) => {
             <div className="flex items-center justify-between">
               <div className="flex gap-2">
                 <a
-                  href={`${image?.asset?.url}?dl=`}
+                  // href={`${image?.asset?.url}?dl=`}
+                  href={image}
                   download
                   onClick={(e) => {
                     e.stopPropagation();

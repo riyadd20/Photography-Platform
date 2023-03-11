@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
-import { GoogleLogin, googleLogout } from "@react-oauth/google";
+// import { GoogleLogin, googleLogout } from "@react-oauth/google";
 // import logo from "../assets/logowhite.png";
 
 import { client } from "../client";
@@ -11,11 +11,11 @@ import { client } from "../client";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    if(user._id) {
-      navigate('/home');
+    if (user._id) {
+      navigate("/home");
     }
   }, [user]);
 

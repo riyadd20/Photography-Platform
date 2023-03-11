@@ -10,8 +10,8 @@ function App() {
       clientId={`{process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}`}
     >
       <Routes>
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/*" element={<Home />} />
       </Routes>
     </GoogleOAuthProvider>

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
-import { GoogleLogin, googleLogout } from "@react-oauth/google";
+// import { GoogleLogin, googleLogout } from "@react-oauth/google";
 // import logo from "../assets/logowhite.png";
 import axios from "axios";
 import { setLogin } from "../store/auth/auth";
@@ -13,42 +13,45 @@ import { client } from "../client";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    if(user._id) {
-      navigate('/home');
+    if (user._id) {
+      navigate("/home");
     }
   }, [user]);
 
-  const responseGoogle = (response) => {
-    localStorage.setItem("user", JSON.stringify(response.profileObj));
-    const { name, googleId, imageUrl } = response.profileObj;
-    const doc = {
-      _id: googleId,
-      _type: "user",
-      userName: name,
-      image: imageUrl,
-    };
-    client.createIfNotExists(doc).then(() => {
-      navigate("/", { replace: true });
-    });
-  };
+  // const responseGoogle = (response) => {
+  //   localStorage.setItem("user", JSON.stringify(response.profileObj));
+  //   const { name, googleId, imageUrl } = response.profileObj;
+  //   const doc = {
+  //     _id: googleId,
+  //     _type: "user",
+  //     userName: name,
+  //     image: imageUrl,
+  //   };
+  //   client.createIfNotExists(doc).then(() => {
+  //     navigate("/", { replace: true });
+  //   });
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData);
-    
+
     try {
-      const response = await axios.post('http://localhost:3001/auth/login', formProps);
+      const response = await axios.post(
+        "http://localhost:3001/auth/login",
+        formProps
+      );
       console.log(response.data);
       dispatch(setLogin(response.data));
-      navigate('/home');
+      navigate("/home");
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
   return (
     <div>

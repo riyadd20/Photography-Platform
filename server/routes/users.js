@@ -3,7 +3,6 @@ import {
     getUser,
     getUserFollowers,
     getUserFollowing,
-    // addRemoveFollower,
     addRemoveFollowing,
 } from '../controllers/users.js';
 import { verifyToken } from '../middlewares/auth.js';
@@ -21,10 +20,7 @@ router.get('/:id/followings', verifyToken, getUserFollowing);
 // router.get('/:id/followings', getUserFollowing);
 
 /* UPDATE */
-// router.patch('/:id/:followerId', verifyToken, addRemoveFollower);
-// router.patch('/:id/:followerId', addRemoveFollower);
-
-// router.patch('/:id/:followingId', verifyToken, addRemoveFollowing);
-router.patch('/:id/:followingId', addRemoveFollowing);
+router.patch('/:id/:followingId', verifyToken, addRemoveFollowing);
+// router.patch('/:id/:followingId', addRemoveFollowing);
 
 export default router;

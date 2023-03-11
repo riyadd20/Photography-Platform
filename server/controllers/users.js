@@ -54,8 +54,8 @@ export const addRemoveFollowing = async (req, res) => {
 
         // Check Following List
         if(user.following.includes(followingId)) {       // Remove Following
-            user.following = user.following.filter(id => id !== followingId);
-            friend.followers = friend.followers.filter(id => id !== userId);
+            user.following = user.following.filter(id => id.toString() !== followingId);
+            friend.followers = friend.followers.filter(id => id.toString() !== userId);
         } else {                                    // Add Following
             user.following.push(followingId);
             friend.followers.push(userId);
@@ -67,7 +67,6 @@ export const addRemoveFollowing = async (req, res) => {
 
         // Send back the following list as a response
         const { following } = await user.populate('following');
-        console.log(following)
 
         const formattedFollowings = following.map(
             ({ _id, firstName, lastName, occupation, location, picturePath }) => {
@@ -75,7 +74,7 @@ export const addRemoveFollowing = async (req, res) => {
             }
         );
 
-        return res.status(200).json(formattedFollowings);
+        return res.status(200).json({ follow: formattedFollowings.length ? true : false });
     } catch (error) {
         return res.status(404).json({ message: error.message });
     }

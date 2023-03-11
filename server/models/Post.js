@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const postSchema = mongoose.Schema(
   {
     userId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -16,11 +16,7 @@ const postSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    hashtags: [
-      {
-        type: String,
-      },
-    ],
+    hashtags: Array,
     specs: String,
     picturePath: String,
     location: {

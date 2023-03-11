@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import { HiMenu } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { Link, Route, Routes } from "react-router-dom";
-
 import { Sidebar, UserProfile } from "../components";
 import { userQuery } from "../utils/data";
 import { client } from "../client";
@@ -11,8 +11,9 @@ import Pin from "./Pin";
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(useSelector(state => state.auth.user));
   const scrollRef = useRef(null);
+  console.log(user)
 
   // const userInfo =
   //   localStorage.getItem("user") !== "undefined"

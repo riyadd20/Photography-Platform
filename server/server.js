@@ -10,7 +10,7 @@ import multer from 'multer';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import authRoutes from './routes/auth.js';
-// import userRoutes from './routes/users.js';
+import userRoutes from './routes/users.js';
 // import postRoutes from './routes/posts.js';
 import { verifyToken } from './middlewares/auth.js';
 import { register } from './controllers/auth.js';
@@ -43,7 +43,7 @@ const upload = multer({ storage });
 
 /* ROUTES */
 app.use('/auth', authRoutes);
-// app.use('/users', userRoutes);
+app.use('/users', userRoutes);
 // app.use('/posts', postRoutes);
 
 /* ROUTES WITH FILES */

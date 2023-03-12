@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MdDownloadForOffline } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-
+import axios from "axios";
 import { client, urlFor } from "../client";
 import MasonryLayout from "./MasonryLayout";
 import { pinDetailMorePinQuery, pinDetailQuery } from "../utils/data";
@@ -14,21 +14,50 @@ const PinDetail = ({ user }) => {
   const [pinDetail, setPinDetail] = useState();
   const [comment, setComment] = useState("");
   const [addingComment, setAddingComment] = useState(false);
-  const fetchPinDetails = () => {
-    const query = pinDetailQuery(pinId);
-    if (query) {
-      client.fetch(`${query}`).then((data) => {
-        setPinDetail(data[0]);
-        console.log(data);
-        if (data[0]) {
-          const query1 = pinDetailMorePinQuery(data[0]);
-          client.fetch(query1).then((res) => {
-            setPins(res);
-          });
-        }
-      });
-    }
+  useEffect(() => {
+    const fetchPinDetails = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:3001/posts/${pinId}`
+        );
+        setPinDetail(data);
+
+        const response = await axios.get(`http://localhost:3001/random`);
+        setPins(response.data);
+
+        console.log(data, response.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    fetchPinDetails();
+  }, [pinId]);
+
+  const fetchPinDetails = async () => {
+    // const query = pinDetailQuery(pinId);
+    // if (query) {
+    //   client.fetch(`${query}`).then((data) => {
+    //     setPinDetail(data[0]);
+    //     console.log(data);
+    //     if (data[0]) {
+    //       const query1 = pinDetailMorePinQuery(data[0]);
+    //       client.fetch(query1).then((res) => {
+    //         setPins(res);
+    //       });
+    //     }
+    //   });
+    // try {
+    //   const { data } = await axios.get(`http://localhost:3001/posts/${pinId}`);
+    //   setPinDetail(data);
+    //   const response = await axios.get(`http://localhost:3001/random`);
+    //   setPins(response.data);
+    //   console.log(data, response.data);
+    // } catch (error) {
+    //   console.log(error.message);
+    // }
   };
+  // };
   // useEffect(() => {
   //   fetchPinDetails();
   // }, [pinId]);

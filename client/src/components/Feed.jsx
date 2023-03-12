@@ -43,4 +43,4 @@ const Feed = ({path}) => {
   return <div>{pins && <MasonryLayout pins={pins} />}</div>;
 };
 
-// export default Feed;
+export default Feed;

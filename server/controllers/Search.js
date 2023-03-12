@@ -119,4 +119,21 @@ const search = async (req,res) => {
   }
 
 
-  export { search, recommendations, trending, random };
+  
+
+  const categoryFilter = async (req,res) => {
+    try{
+        const type = req.params.type
+        const posts = await Post.find({category:type})
+        return res.status(200).json({posts:posts});
+    }
+    catch(error){
+        return res.status(500).json({ error: error.message });
+    }
+  }
+
+
+
+
+
+  export { search, recommendations, trending, random, categoryFilter };

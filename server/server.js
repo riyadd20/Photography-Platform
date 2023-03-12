@@ -15,7 +15,7 @@ import postRoutes from './routes/posts.js';
 import { verifyToken } from './middlewares/auth.js';
 import { register } from './controllers/auth.js';
 import { createPost } from './controllers/posts.js';
-import { search, recommendations, trending, random } from './controllers/search.js'
+import { search, recommendations, trending, random, categoryFilter } from './controllers/search.js'
 
 /* CONFIGURATIONS  */
 dotenv.config();
@@ -72,6 +72,7 @@ app.post('/search',search)
 app.get('/recommendations',recommendations)
 app.get('/trending',trending)
 app.get('/random',random)
+app.get('/category/:type',categoryFilter)
 
 
 /* MONGOOSE SETUP */

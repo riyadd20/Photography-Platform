@@ -43,7 +43,12 @@ const Sidebar = ({ closeToggle }) => {
           <h3 className="mt-2 px-5 text-base 2xl:text-xl">Categories</h3>
           {categories.slice(0, categories.length - 1).map((category) => (
             <NavLink
-              to={`/category/${category.name}`} state={{path:`category/${category.name.charAt(0).toUpperCase() + category.name.slice(1)}`}}
+              to={`/category/${category.name}`}
+              state={{
+                path: `category/${
+                  category.name.charAt(0).toUpperCase() + category.name.slice(1)
+                }`,
+              }}
               className={({ isActive }) =>
                 isActive ? isActiveStyle : isNotActiveStyle
               }

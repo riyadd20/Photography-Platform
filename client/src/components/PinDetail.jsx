@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MdDownloadForOffline } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-
+import axios from "axios";
 import { client, urlFor } from "../client";
 import MasonryLayout from "./MasonryLayout";
 import { pinDetailMorePinQuery, pinDetailQuery } from "../utils/data";
@@ -14,21 +14,52 @@ const PinDetail = ({ user }) => {
   const [pinDetail, setPinDetail] = useState();
   const [comment, setComment] = useState("");
   const [addingComment, setAddingComment] = useState(false);
-  const fetchPinDetails = () => {
-    const query = pinDetailQuery(pinId);
-    if (query) {
-      client.fetch(`${query}`).then((data) => {
-        setPinDetail(data[0]);
-        console.log(data);
-        if (data[0]) {
-          const query1 = pinDetailMorePinQuery(data[0]);
-          client.fetch(query1).then((res) => {
-            setPins(res);
-          });
-        }
-      });
-    }
+  useEffect(() => {
+    const fetchPinDetails = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:3001/posts/${pinId}`
+        );
+        setPinDetail(data);
+
+        const response = await axios.get(
+          `http://localhost:3001/category/${data.category}`
+        );
+        setPins(response.data.posts);
+
+        // console.log(data, response.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    fetchPinDetails();
+  }, [pinId]);
+
+  const fetchPinDetails = async () => {
+    // const query = pinDetailQuery(pinId);
+    // if (query) {
+    //   client.fetch(`${query}`).then((data) => {
+    //     setPinDetail(data[0]);
+    //     console.log(data);
+    //     if (data[0]) {
+    //       const query1 = pinDetailMorePinQuery(data[0]);
+    //       client.fetch(query1).then((res) => {
+    //         setPins(res);
+    //       });
+    //     }
+    //   });
+    // try {
+    //   const { data } = await axios.get(`http://localhost:3001/posts/${pinId}`);
+    //   setPinDetail(data);
+    //   const response = await axios.get(`http://localhost:3001/random`);
+    //   setPins(response.data);
+    //   console.log(data, response.data);
+    // } catch (error) {
+    //   console.log(error.message);
+    // }
   };
+  // };
   // useEffect(() => {
   //   fetchPinDetails();
   // }, [pinId]);
@@ -65,9 +96,9 @@ const PinDetail = ({ user }) => {
         >
           <div className="flex justify-center items-center md:items-start flex-initial">
             <img
-              className="rounded-t-3xl rounded-b-lg"
+              className="rounded-t-3xl rounded-b-lg  blur-sm"
               // src={pinDetail?.image && urlFor(pinDetail?.image).url()}
-              src={`http://localhost:3001/assets/${user.picturePath}`}
+              src={`http://localhost:3001/assets/${pinDetail.picturePath}`}
               alt="user-post"
             />
           </div>
@@ -76,7 +107,9 @@ const PinDetail = ({ user }) => {
               <div className="flex gap-2 items-center">
                 <a
                   // href={`${pinDetail.image.asset.url}?dl=`}
-                  href={`http://localhost:3001/assets/${user.picturePath}`}
+                  // href={`http://localhost:3001/assets/${pinDetail.picturePath}`}
+                  href="https://randomqr.com/assets/images/randomqr-256.png"
+                  target="__blank"
                   download
                   className="bg-secondaryColor p-2 text-xl rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100"
                 >
@@ -91,20 +124,21 @@ const PinDetail = ({ user }) => {
               <h1 className="text-4xl font-bold break-words mt-3">
                 {pinDetail.title}
               </h1>
-              <p className="mt-3">{pinDetail.about}</p>
+              <p className="mt-3">{pinDetail.description}</p>
             </div>
             <Link
-              to={`/user-profile/${pinDetail?.postedBy._id}`}
-              className="flex gap-2 mt-5 items-center bg-white rounded-lg "
+              to={`/user-profile/${pinDetail.userId._id}`}
+              className="flex gap-2 mt-5 items-center bg-white rounded-lg"
             >
               <img
-                src={pinDetail?.postedBy.image}
+                // src={pinDetail?.postedBy.image}
+                src={`http://localhost:3001/assets/${user.picturePath}`}
                 className="w-10 h-10 rounded-full"
                 alt="user-profile"
               />
-              <p className="font-bold">{pinDetail?.postedBy.userName}</p>
+              <p className="font-bold">{`${pinDetail.userId.firstName} ${pinDetail.userId.lastName}`}</p>
             </Link>
-            <h2 className="mt-5 text-2xl">Comments</h2>
+            {/* <h2 className="mt-5 text-2xl">Comments</h2>
             <div className="max-h-370 overflow-y-auto">
               {pinDetail?.comments?.map((item) => (
                 <div
@@ -122,30 +156,16 @@ const PinDetail = ({ user }) => {
                   </div>
                 </div>
               ))}
-            </div>
-            <div className="flex flex-wrap mt-6 gap-3">
+            </div> */}
+            {/* <div className="flex flex-wrap mt-6 gap-3">
               <Link to={`/user-profile/${user._id}`}>
                 <img
-                  src={user.image}
+                  src={`http://localhost:3001/assets/${user.picturePath}`}
                   className="w-10 h-10 rounded-full cursor-pointer"
                   alt="user-profile"
                 />
               </Link>
-              <input
-                className=" flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-300"
-                type="text"
-                placeholder="Add a comment"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-              <button
-                type="button"
-                className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none"
-                onClick={addComment}
-              >
-                {addingComment ? "Doing..." : "Done"}
-              </button>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

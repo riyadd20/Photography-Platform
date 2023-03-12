@@ -8,7 +8,6 @@ import IMG5 from "../../images/courses5.jpg";
 import "./Section.css";
 
 const data = [
-    
   {
     id: 1,
     image: IMG1,
@@ -68,9 +67,11 @@ const section = () => {
                 <img src={image} />
               </div>
             </div>
-            <div className="right-container block">
+            <div className="right-container section-block">
               <div className="sec-container">
-                <h2><b>{title}</b></h2>
+                <h2>
+                  <b>{title}</b>
+                </h2>
                 <h3>{date}</h3>
                 <h4>{description}</h4>
                 <button className="button-13">Book Now</button>

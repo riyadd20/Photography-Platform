@@ -124,7 +124,7 @@ const search = async (req,res) => {
   const categoryFilter = async (req,res) => {
     try{
         const type = req.params.type
-        const posts = await Post.find({category:type})
+        const posts = await Post.find({category:type}).populate('userId')
         return res.status(200).json({posts:posts});
     }
     catch(error){

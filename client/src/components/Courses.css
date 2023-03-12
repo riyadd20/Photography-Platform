@@ -1,0 +1,29 @@
+h1 {
+    text-align: center;
+    /* margin: 40px auto; */
+    word-spacing: 3px;
+    color: white;
+    padding-top: 50px;
+    margin-bottom: 70px;
+  }
+
+  .events-body {
+    margin-top: 10px;
+    font-family: "Avenir", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    background-color:#aca4fe ;
+    
+  }  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+  }
+  
+  
+
+  
+  

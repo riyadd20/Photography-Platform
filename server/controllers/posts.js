@@ -52,7 +52,7 @@ export const getFeedPosts = async (req, res) => {
 
 export const getUserPosts = async (req, res) => {
     try {
-        const posts = await Post.find({ userId: req.params.userId }, null, { sort: { 'createdAt': -1 } });
+        const posts = await Post.find({ userId: req.params.userId }, null, { sort: { 'createdAt': -1 } }).populate('userId');
 
         return res.status(200).json(posts);
     } catch (error) {

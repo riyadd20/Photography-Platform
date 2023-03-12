@@ -15,11 +15,11 @@ const router = express.Router();
 // router.get('/', verifyToken, getFeedPosts);
 router.get('/', getFeedPosts);
 
-router.get('/:userId/posts', verifyToken, getUserPosts);
-// router.get('/:userId/posts', getUserPosts);
+// router.get('/:userId/posts', verifyToken, getUserPosts);
+router.get('/:userId/posts', getUserPosts);
 
-router.get('/:userId/saved-posts', verifyToken, getUserSavedPosts);
-// router.get('/:userId/saved-posts', getUserSavedPosts);
+// router.get('/:userId/saved-posts', verifyToken, getUserSavedPosts);
+router.get('/:userId/saved-posts', getUserSavedPosts);
 
 /* UPDATE */
 router.patch('/:id/like', verifyToken, likePost);

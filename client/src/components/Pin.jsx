@@ -16,9 +16,8 @@ const Pin = ({ pin }) => {
 
   const navigate = useNavigate();
 
-  const { postedBy, picturePath, _id, destination } = pin;
+  const { userId:postedBy, picturePath, _id, destination } = pin;
   const image = `http://localhost:3001/assets/${picturePath}`
-  console.log(image);
 
   // const user =
   //   localStorage.getItem("user") !== "undefined"
@@ -152,12 +151,13 @@ const Pin = ({ pin }) => {
         )}
       </div>
       <Link
-        to={`/user-profile/${postedBy?._id}`}
+        to={`/user-profile/${postedBy._id}`}
         className="flex gap-2 mt-2 items-center"
       >
         <img
           className="w-8 h-8 rounded-full object-cover"
-          src={postedBy?.image}
+          // src={postedBy?.image}
+          src={`http://localhost:3001/assets/${postedBy.picturePath}`}
           alt="user-profile"
         />
         <p className="font-semibold capitalize">{postedBy?.userName}</p>

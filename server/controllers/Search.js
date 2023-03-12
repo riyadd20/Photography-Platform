@@ -108,7 +108,7 @@ const search = async (req,res) => {
             return newArr
         };
 
-        const posts = await Post.find({})
+        const posts = await Post.find({}).populate('userId')
         const finalRandomPosts = getShuffledArr(posts)
         return res.status(200).json({posts:finalRandomPosts});
 

@@ -91,6 +91,3 @@ try {
 } catch (error) {
   console.log('Database not connected...')
 }
-
-
-

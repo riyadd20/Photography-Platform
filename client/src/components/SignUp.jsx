@@ -13,7 +13,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (user?._id) {
-      navigate("/home");
+      navigate("/");
     }
   }, [user]);
 

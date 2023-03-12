@@ -72,7 +72,7 @@ const section = () => {
               <div className="sec-container">
                 <h2><b>{title}</b></h2>
                 <h3>{date}</h3>
-                <p>{description}</p>
+                <h4>{description}</h4>
                 <button className="button-13">Book Now</button>
               </div>
             </div>

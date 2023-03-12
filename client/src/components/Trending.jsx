@@ -73,7 +73,7 @@ export default function Trending (){
     
     return (
       <div className="trending">
-        <p> Trending.</p>
+        <p className="trending-title"> Trending.</p>
 
         {/* <div><img className="im1" src={IMG1} /></div> */}
         <Slider {...settings}>

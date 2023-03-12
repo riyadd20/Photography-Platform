@@ -39,10 +39,10 @@
     margin-top: 1rem;
   }
   /* right sided */
-  .cards {
+  .services-cards {
     position: relative;
   }
-  .cards > * {
+  .services-cards > * {
     position: absolute;
   }
   
@@ -66,12 +66,12 @@
       padding: 0;
     }
   
-    .cards {
+    .services-cards {
       display: flex;
       flex-direction: column;
       gap: 17rem;
     }
-    .cards > * {
+    .services-cards > * {
       position: static;
     }
   }

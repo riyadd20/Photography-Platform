@@ -1,10 +1,12 @@
-h1 {
+.courses-h1 {
     text-align: center;
     /* margin: 40px auto; */
     word-spacing: 3px;
     color: white;
     padding-top: 50px;
     margin-bottom: 70px;
+    font-size: 50px;
+    font-weight: bold;
   }
 
   .events-body {
@@ -15,7 +17,9 @@ h1 {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    background-color:#aca4fe ;
+    background-image: url("./bgimg.png") ;
+    background-repeat:no-repeat;
+  background-size:cover;
     
   }  
   code {

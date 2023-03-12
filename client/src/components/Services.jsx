@@ -38,7 +38,7 @@ const Services = () => {
         <div className="blur s-blur1" style={{ background: "#ABF1FF94" }}></div>
       </div>
       {/* right */}
-      <div className="cards">
+      <div className="services-cards">
         {/* first card */}
         <motion.div
           initial={{ left: "25rem" }}

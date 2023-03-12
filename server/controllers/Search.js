@@ -37,16 +37,17 @@ const search = async (req,res) => {
 
   const recommendations = async (req,res) => {
     try{
-        const userId = req.body.id
+        const userId = req.query.id;
+        // console.log(req.query)
         const user = await User.findById(userId)
         user.search.sort((a,b) => (a.count > b.count) ? 1 : ((b.count > a.count) ? -1 : 0));
         const userTags = user.search.reverse().map( item => item.tag)
         const topFive = userTags.slice(0,5)
-        const posts = await Post.find({hashtags: { $in: topFive }}).sort({impressions:-1})
+        const posts = await Post.find({hashtags: { $in: topFive }}).sort({impressions:-1}).populate('userId');
         
-        const randomPosts = await Post.find({ hashtags: { $nin: userTags } }).sort({impressions:-1})
+        const randomPosts = await Post.find({ hashtags: { $nin: userTags } }).sort({impressions:-1}).populate('userId')
         const totalPosts = posts.concat(randomPosts)
-        return res.status(200).json({search:topFive,totalPosts:totalPosts});
+        return res.status(200).json({search:topFive,posts:totalPosts});
 
     }
     catch(error){

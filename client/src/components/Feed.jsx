@@ -8,7 +8,7 @@ import Spinner from "./Spinner";
 import axios from "axios";
 
 const Feed = ({path}) => {
-  const { token } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
   const [pins, setPins] = useState();
   const [loading, setLoading] = useState(false);
   const { categoryId } = useParams();
@@ -21,18 +21,20 @@ const Feed = ({path}) => {
 
   useEffect(() => {
     const getFeed = async () => {
-      try {
-        const { data } = await axios.get(`http://localhost:3001/${path}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        setPins(data.posts);
-      } catch (error) {
-        console.log(error.message);
-      }
+      // if(user)
+        try {
+          const { data } = await axios.get(`http://localhost:3001/${path}`, {
+            headers: { Authorization: `Bearer ${token}` },
+            // body: JSON.stringify({ id: user._id })
+          });
+          setPins(data.posts);
+        } catch (error) {
+          console.log(error.message);
+        }
     };
 
     getFeed();
-  },[path]);
+  },[path, user]);
 
   const ideaName = categoryId || "new";
   if (loading) {

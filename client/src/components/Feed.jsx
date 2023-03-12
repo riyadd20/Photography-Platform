@@ -16,10 +16,10 @@ const Feed = () => {
   useEffect(() => {
     const getFeed = async () => {
       try {
-        const { data } = await axios.get('http://localhost:3001/posts', {
+        const { data } = await axios.get('http://localhost:3001/random', {
           headers: { Authorization: `Bearer ${token}` }
         });
-        setPins(data);
+        setPins(data.posts);
       } catch (error) {
         console.log(error.message);
       }

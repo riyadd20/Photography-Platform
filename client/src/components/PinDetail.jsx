@@ -29,9 +29,9 @@ const PinDetail = ({ user }) => {
       });
     }
   };
-  useEffect(() => {
-    fetchPinDetails();
-  }, [pinId]);
+  // useEffect(() => {
+  //   fetchPinDetails();
+  // }, [pinId]);
   const addComment = () => {
     if (comment) {
       setAddingComment(true);
@@ -66,7 +66,8 @@ const PinDetail = ({ user }) => {
           <div className="flex justify-center items-center md:items-start flex-initial">
             <img
               className="rounded-t-3xl rounded-b-lg"
-              src={pinDetail?.image && urlFor(pinDetail?.image).url()}
+              // src={pinDetail?.image && urlFor(pinDetail?.image).url()}
+              src={`http://localhost:3001/assets/${user.picturePath}`}
               alt="user-post"
             />
           </div>
@@ -74,7 +75,8 @@ const PinDetail = ({ user }) => {
             <div className="flex items-center justify-between">
               <div className="flex gap-2 items-center">
                 <a
-                  href={`${pinDetail.image.asset.url}?dl=`}
+                  // href={`${pinDetail.image.asset.url}?dl=`}
+                  href={`http://localhost:3001/assets/${user.picturePath}`}
                   download
                   className="bg-secondaryColor p-2 text-xl rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100"
                 >

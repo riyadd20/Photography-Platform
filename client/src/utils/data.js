@@ -39,21 +39,21 @@ export const categories = [
     image:
       "https://images.unsplash.com/photo-1484278786775-527ac0d0b608?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8TWFjcm98ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
   },
-  {
-    name: "architecture",
-    image:
-      "https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGFyY2hpdGVjdHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    name: "nightlife",
-    image:
-      "https://images.unsplash.com/photo-1577450775949-58ec8d02cad9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bmlnaHRsaWZlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    name: "abstract",
-    image:
-      "https://images.unsplash.com/photo-1557672172-298e090bd0f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFic3RyYWN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-  },
+  // {
+  //   name: "architecture",
+  //   image:
+  //     "https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGFyY2hpdGVjdHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
+  // },
+  // {
+  //   name: "nightlife",
+  //   image:
+  //     "https://images.unsplash.com/photo-1577450775949-58ec8d02cad9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bmlnaHRsaWZlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+  // },
+  // {
+  //   name: "abstract",
+  //   image:
+  //     "https://images.unsplash.com/photo-1557672172-298e090bd0f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGFic3RyYWN0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+  // },
 ];
 
 export const feedQuery = `*[_type == "pin"] | order(_createdAt desc) {

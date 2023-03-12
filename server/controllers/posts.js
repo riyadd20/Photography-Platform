@@ -4,7 +4,7 @@ import User from "../models/User.js";
 /* CREATE */
 export const createPost = async (req, res) => {
     try {
-        const { userId, title, description, hashtags, specs, picturePath, city, country, price } = req.body;
+        const { userId, title, description, hashtags, specs, picturePath, city, country, price, category } = req.body;
         console.log(req.body)
         
         const user = await User.findById(userId);
@@ -21,10 +21,14 @@ export const createPost = async (req, res) => {
             share: `http://loclahost:3001/assets/${picturePath}`,
             likes: {},
             saved: {},
+            category: category
         });
 
-        await newPost.save();
-
+        let newRoomId
+        const data = await newPost.save();
+        newRoomId = data._id
+        user.created.push(newRoomId)
+        user.save();
         return res.status(201).json({ success: 'Post added successfully!' });
 
         // // Get All Posts
@@ -38,7 +42,7 @@ export const createPost = async (req, res) => {
 /* READ */
 export const getFeedPosts = async (req, res) => {
     try {
-        const post = await Post.find();
+        const post = await Post.find().populate('userId');
 
         return res.status(200).json(post);
     } catch (error) {
@@ -48,7 +52,7 @@ export const getFeedPosts = async (req, res) => {
 
 export const getUserPosts = async (req, res) => {
     try {
-        const posts = await Post.find({ userId: req.params.userId }, null, { sort: { 'createdAt': -1 } });
+        const posts = await Post.find({ userId: req.params.userId }, null, { sort: { 'createdAt': -1 } }).populate('userId');
 
         return res.status(200).json(posts);
     } catch (error) {
@@ -134,7 +138,7 @@ export const savePost = async (req, res) => {
             // By default it is false, which returns the non-updated document
         );
 
-        return res.status(200).json({ success: 'Post successfully saved!' });
+        return res.status(200).json({ saved: !isSaved });
     } catch (error) {
         return res.status(404).json({ message: error.message });
     }

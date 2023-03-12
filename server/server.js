@@ -15,7 +15,7 @@ import postRoutes from './routes/posts.js';
 import { verifyToken } from './middlewares/auth.js';
 import { register } from './controllers/auth.js';
 import { createPost } from './controllers/posts.js';
-import { search, recommendations, trending } from './controllers/search.js'
+import { search, recommendations, trending, random, categoryFilter } from './controllers/search.js'
 
 /* CONFIGURATIONS  */
 dotenv.config();
@@ -51,8 +51,8 @@ app.use('/posts', postRoutes);
 /* ROUTES WITH FILES */
 app.post('/auth/register', upload.single('picture'), register);
 // app.post('/auth/register', register);
-app.post('/create', verifyToken, upload.single('picture'), createPost);
-// app.post('/post/create', createPost);
+// app.post('/create', verifyToken, upload.single('picture'), createPost);
+app.post('/post/create', createPost);
 
 app.post('/getPassword', async (req, res) => {
   try {
@@ -71,6 +71,9 @@ app.post('/getPassword', async (req, res) => {
 app.post('/search',search)
 app.get('/recommendations',recommendations)
 app.get('/trending',trending)
+app.get('/random',random)
+app.get('/category/:type',categoryFilter)
+
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 3001;
@@ -89,6 +92,3 @@ try {
 } catch (error) {
   console.log('Database not connected...')
 }
-
-
-

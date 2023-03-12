@@ -1,8 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import { RiHomeFill } from "react-icons/ri";
 import { IoIosArrowForward } from "react-icons/io";
-// import logo from "../assets/logo.png";
+import logo from "../assets/logo.png";
 import { categories } from "../utils/data";
 
 const isNotActiveStyle =
@@ -10,10 +11,13 @@ const isNotActiveStyle =
 const isActiveStyle =
   "flex items-center px-5 gap-3 font-extrabold border-r-2 border-black  transition-all duration-200 ease-in-out capitalize";
 
-const Sidebar = ({ closeToggle, user }) => {
+const Sidebar = ({ closeToggle }) => {
+  const user = useSelector((state) => state.auth.user);
   const handleCloseSidebar = () => {
     if (closeToggle) closeToggle(false);
   };
+
+  const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
     <div className="flex flex-col justify-between bg-white h-full overflow-y-scroll min-w-210 hide-scrollbar">
@@ -23,8 +27,7 @@ const Sidebar = ({ closeToggle, user }) => {
           className="flex px-5 gap-2 my-6 pt-1 w-190 items-center"
           onClick={handleCloseSidebar}
         >
-          {/* <img src={logo} alt="logo" className="w-full" /> */}
-          LensLyfe
+          <img src={logo} alt="logo" className="w-full" />
         </Link>
         <div className="flex flex-col gap-5">
           <NavLink
@@ -40,7 +43,7 @@ const Sidebar = ({ closeToggle, user }) => {
           <h3 className="mt-2 px-5 text-base 2xl:text-xl">Categories</h3>
           {categories.slice(0, categories.length - 1).map((category) => (
             <NavLink
-              to={`/category/${category.name}`}
+              to={`/category/${category.name}`} state={{path:`category/${category.name.charAt(0).toUpperCase() + category.name.slice(1)}`}}
               className={({ isActive }) =>
                 isActive ? isActiveStyle : isNotActiveStyle
               }
@@ -63,11 +66,11 @@ const Sidebar = ({ closeToggle, user }) => {
           onClick={handleCloseSidebar}
         >
           <img
-            src={user.image}
+            src={`http://localhost:3001/assets/${user.picturePath}`}
             className="w-10 h-10 rounded-full"
             alt="user-profile"
           />
-          <p>{user.userName}</p>
+          <p>{fullName}</p>
           <IoIosArrowForward />
         </Link>
       )}

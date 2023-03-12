@@ -22,7 +22,6 @@ const search = async (req,res) => {
         user.save()
 
         const posts = await Post.find({hashtags: { $in: tagsArray }})
-        console.log(posts)
 
         return res.status(200).json({posts:posts});
 
@@ -31,6 +30,10 @@ const search = async (req,res) => {
         return res.status(500).json({ error: error.message });
     }
   }
+
+
+
+
 
   const recommendations = async (req,res) => {
     try{
@@ -54,9 +57,14 @@ const search = async (req,res) => {
 
 
 
+
+
   const trending = async (req,res) => {
     try{
+        //trending posts
         const posts = await Post.find({}).sort({impressions:-1})
+
+        //trensing hashtags
         let topResults = []
         const users = await User.find({})
         users.map( user => {
@@ -64,15 +72,22 @@ const search = async (req,res) => {
             topResults.push(...results)
         } )
 
-        // topResults,
-        // user.search.sort((a,b) => (a.count > b.count) ? 1 : ((b.count > a.count) ? -1 : 0));
-        // const userTags = user.search.reverse().map( item => item.tag)
-        // const topFive = userTags.slice(0,5)
-        // const posts = await Post.find({hashtags: { $in: topFive }}).sort({impressions:-1})
-        
-        // const randomPosts = await Post.find({ hashtags: { $nin: userTags } }).sort({impressions:-1})
-        // const totalPosts = posts.concat(randomPosts)
-        return res.status(200).json({posts:topResults});
+        let finalResults = []
+
+        topResults.forEach( item => {
+            let present = false
+            finalResults.forEach( check => {
+                if (check.tag == item.tag){
+                    present = true
+                    check.count = check.count + item.count
+                }
+            })
+            !present && finalResults.push(item)
+        })
+
+        const finalTags = finalResults.sort((a,b) => (a.count > b.count) ? 1 : ((b.count > a.count) ? -1 : 0)).reverse().map( item => item.tag)
+
+        return res.status(200).json({trendingTags:finalTags,trendingPosts:posts});
 
     }
     catch(error){
@@ -80,4 +95,45 @@ const search = async (req,res) => {
     }
   }
 
-  export { search, recommendations, trending };
+
+  const random = async (req,res) => {
+    try{
+        //array randomizer helper function
+        const getShuffledArr = arr => {
+            const newArr = arr.slice()
+            for (let i = newArr.length - 1; i > 0; i--) {
+                const rand = Math.floor(Math.random() * (i + 1));
+                [newArr[i], newArr[rand]] = [newArr[rand], newArr[i]];
+            }
+            return newArr
+        };
+
+        const posts = await Post.find({}).populate('userId')
+        const finalRandomPosts = getShuffledArr(posts)
+        return res.status(200).json({posts:finalRandomPosts});
+
+    }
+    catch(error){
+        return res.status(500).json({ error: error.message });
+    }
+  }
+
+
+  
+
+  const categoryFilter = async (req,res) => {
+    try{
+        const type = req.params.type
+        const posts = await Post.find({category:type}).populate('userId')
+        return res.status(200).json({posts:posts});
+    }
+    catch(error){
+        return res.status(500).json({ error: error.message });
+    }
+  }
+
+
+
+
+
+  export { search, recommendations, trending, random, categoryFilter };

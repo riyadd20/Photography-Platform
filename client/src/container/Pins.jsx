@@ -20,7 +20,7 @@ const Pins = () => {
       <div className="h-full">
         <Routes>
           <Route path="/" element={<Feed path="random"/>} />
-          <Route path="/category/:categoryId" element={<Feed />} />
+          <Route path="/category/:categoryId" element={<Feed path={"category"}/>} />
           <Route
             path="/pin-detail/:pinId"
             element={<PinDetail user={user && user} />}

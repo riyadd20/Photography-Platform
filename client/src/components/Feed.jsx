@@ -15,7 +15,7 @@ const Feed = ({path}) => {
   
   const location = useLocation();
   
-  if(!path && location.state){
+  if(path=='category' && location.state){
     path = location.state.path
   }
 
@@ -32,7 +32,7 @@ const Feed = ({path}) => {
     };
 
     getFeed();
-  },[pins]);
+  },[path]);
 
   const ideaName = categoryId || "new";
   if (loading) {

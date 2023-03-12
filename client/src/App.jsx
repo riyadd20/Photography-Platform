@@ -18,10 +18,10 @@ function App() {
       clientId={`{process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}`}
     >
       <Routes>
+        <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/*" element={<Home />} />
-        <Route path="main" element={<Main />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="courses" element={<Courses />} />
         <Route path="contactform" element={<ContactForm />} />
         <Route path="trending" element={<Trending />} />

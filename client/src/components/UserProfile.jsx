@@ -24,6 +24,7 @@ const UserProfile = () => {
     const [pins, setPins] = useState();
     const [text, setText] = useState("Created");
     const [activeBtn, setActiveBtn] = useState("created");
+    const [profile, setProfile] = useState({});
     const navigate = useNavigate();
     const params = useParams();
     const userId = params[user._id]
@@ -31,11 +32,15 @@ const UserProfile = () => {
     useEffect(() => {
       const getProfileFeed = async () => {
         try {
+          const { data } = await axios.get(`http://localhost:3001/users/${userId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          setProfile(data);
+
           if (text === "Created" && userId) {
             const { data } = await axios.get(`http://localhost:3001/posts/${userId}/posts`, {
               headers: { Authorization: `Bearer ${token}` }
             });
-            console.log(data)
             setPins(data);
           } else if(text === "Saved" && userId) {
             const { data } = await axios.get(`http://localhost:3001/posts/${userId}/saved-posts`, {
@@ -69,12 +74,12 @@ const UserProfile = () => {
               <img
                 className="rounded-full w-20 h-20 -mt-10 shadow-xl object-cover"
                 // src={user.image}
-                src={`http://localhost:3001/assets/${user.picturePath}`}
+                src={`http://localhost:3001/assets/${profile.picturePath}`}
                 alt="user-pic"
               />
             </div>
             <h1 className="font-bold text-3xl text-center mt-3">
-              {`${user.firstName} ${user.lastName}`}
+              {`${profile.firstName} ${profile.lastName}`}
             </h1>
           </div>
           <div className="text-center mb-7">

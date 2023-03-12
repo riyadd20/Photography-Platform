@@ -14,7 +14,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user?._id) {
-      navigate("/home");
+      navigate("/");
     }
   }, [user]);
 
@@ -30,7 +30,7 @@ const Login = () => {
       );
       console.log(response.data);
       dispatch(setLogin(response.data));
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       console.log(error.message);
     }

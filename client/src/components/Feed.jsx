@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { client } from "../client";
 import { feedQuery, searchQuery } from "../utils/data";
@@ -7,16 +7,22 @@ import MasonryLayout from "./MasonryLayout";
 import Spinner from "./Spinner";
 import axios from "axios";
 
-const Feed = () => {
+const Feed = ({path}) => {
   const { token } = useSelector((state) => state.auth);
   const [pins, setPins] = useState();
   const [loading, setLoading] = useState(false);
   const { categoryId } = useParams();
+  
+  const location = useLocation();
+  
+  if(!path && location.state){
+    path = location.state.path
+  }
 
   useEffect(() => {
     const getFeed = async () => {
       try {
-        const { data } = await axios.get('http://localhost:3001/random', {
+        const { data } = await axios.get(`http://localhost:3001/${path}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setPins(data.posts);
@@ -26,7 +32,7 @@ const Feed = () => {
     };
 
     getFeed();
-  },[]);
+  },[pins]);
 
   const ideaName = categoryId || "new";
   if (loading) {

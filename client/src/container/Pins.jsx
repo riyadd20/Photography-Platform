@@ -19,7 +19,7 @@ const Pins = () => {
       </div>
       <div className="h-full">
         <Routes>
-          <Route path="/" element={<Feed />} />
+          <Route path="/" element={<Feed path="random"/>} />
           <Route path="/category/:categoryId" element={<Feed />} />
           <Route
             path="/pin-detail/:pinId"

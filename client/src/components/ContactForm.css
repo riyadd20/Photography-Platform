@@ -25,6 +25,7 @@
 	padding-bottom: 30px;
   }
 
+  
   .contact-form {
 	border-top: solid 1px rgb(213, 213, 213);
   }
@@ -95,10 +96,10 @@
 	background-color: #ffffff;
   }
 
-  p{
+  .contact-p{
 	text-align: center;
 	color: black;
 	padding-top: 20px;
 	font-weight:bold;
-	font-size: 10px;
+	font-size: 45px;
   }
